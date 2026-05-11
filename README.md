@@ -48,7 +48,7 @@ node -v && npm -v
 ## Local development
 
 ```bash
-git clone https://github.com/EkinKarabulut/website.git
+git clone https://github.com/kai-scheduler/website.git
 cd website
 
 # Install the PostCSS toolchain Hugo invokes during builds
