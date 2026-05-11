@@ -1,0 +1,138 @@
+// Albert Sans (official brand typeface) + JetBrains Mono (code)
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+// Shared utilities (a11y, focus rings, common partials' styles)
+@import "kai-shared";
+
+// Homepage layout (everything under the `.alt-d` wrapper). The class name is
+// historical from the alternatives exploration; visually this *is* the homepage.
+@import "alt-d";
+
+// ============================================================
+// Docsy navbar — brand-color overrides on the chrome Docsy renders
+// ============================================================
+.td-navbar {
+  background: #00203E !important;
+
+  .navbar-brand {
+    color: #FFFFFF !important;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  // The horizontal logo SVG already contains the wordmark; hide Docsy's duplicate.
+  .navbar-brand__name { display: none; }
+
+  .navbar-brand__logo svg {
+    height: 34px;
+    width: auto;
+    max-width: 200px;
+    display: block;
+  }
+
+  .nav-link {
+    color: rgba(#FFFFFF, 0.85) !important;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    &:hover { color: #F30099 !important; }
+  }
+}
+
+// ============================================================
+// Docsy footer — magenta accent on links
+// ============================================================
+.td-footer {
+  background: #00203E !important;
+  color: #FFFFFF;
+  a {
+    color: rgba(#FFFFFF, 0.8);
+    &:hover { color: #F30099; }
+  }
+}
+
+// ============================================================
+// Section headings inside the kai-community partial
+// ============================================================
+.section-head {
+  color: #00203E;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+.section-subhead {
+  color: rgba(#00203E, 0.55);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+// ============================================================
+// CNCF endcap (rendered by partials/kai-cncf-endcap.html)
+// ============================================================
+.cncf-endcap {
+  background: #F5F6F8;
+  border-top: 1px solid rgba(#00203E, 0.08);
+  padding: 3rem 0 2rem;
+  p {
+    color: rgba(#00203E, 0.6);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    a {
+      color: #F30099;
+      &:hover { color: darken(#F30099, 10%); }
+    }
+  }
+  img {
+    max-width: 250px;
+    margin-bottom: 1.5rem;
+  }
+  .trademark-notice {
+    font-size: 0.78rem;
+    color: rgba(#00203E, 0.38);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.5;
+    a {
+      color: rgba(#00203E, 0.5);
+      &:hover { color: #F30099; }
+    }
+  }
+}
+
+// ============================================================
+// Community links (rendered by partials/kai-community.html)
+// ============================================================
+.community-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #00203E;
+    font-weight: 500;
+    text-decoration: none;
+    &:hover { color: #F30099; }
+    i {
+      font-size: 1.5rem;
+      color: #F30099;
+    }
+  }
+}
+
+// ============================================================
+// Global typography refinements
+// ============================================================
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.01em;
+}
+code {
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.875em;
+}

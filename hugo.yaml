@@ -1,0 +1,68 @@
+baseURL: https://kai-scheduler.github.io/website/
+title: KAI Scheduler
+contentDir: content/en
+defaultContentLanguage: en
+enableRobotsTXT: true
+enableGitInfo: false
+
+taxonomies:
+  tag: tags
+  category: categories
+
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+    renderer:
+      unsafe: true
+  highlight:
+    style: tango
+
+outputs:
+  home: [HTML, RSS]
+
+imaging:
+  resampleFilter: CatmullRom
+  quality: 75
+  anchor: smart
+
+# Top nav: external GitHub links only. Local /docs, /community, /roadmap pages are gone.
+menu:
+  main:
+    - name: Documentation
+      url: https://github.com/kai-scheduler/KAI-Scheduler/tree/main/docs
+      weight: 10
+    - name: Roadmap
+      url: https://github.com/kai-scheduler/KAI-Scheduler/blob/main/roadmap.md
+      weight: 20
+    - name: Community
+      url: https://github.com/kai-scheduler/KAI-Scheduler/tree/main#community-discussion-and-support
+      weight: 30
+
+params:
+  description: "Kubernetes scheduler optimised for GPU resource allocation for AI workloads"
+  images: [images/logos/horizontal-color-positive-transparent.svg]
+  copyright: "The KAI Scheduler Authors"
+
+  ui:
+    navbar_logo: true
+    navbar_translucent_over_cover_disable: true
+    sidebar_menu_foldable: true
+    sidebar_search_disable: false
+    breadcrumb_disable: false
+    showLightDarkModeMenu: false
+    feedback:
+      enable: false
+    readingtime:
+      enable: false
+
+  github_repo: https://github.com/kai-scheduler/KAI-Scheduler
+  github_project_repo: https://github.com/kai-scheduler/KAI-Scheduler
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.128.0
+  imports:
+    - path: github.com/google/docsy

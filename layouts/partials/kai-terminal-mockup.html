@@ -1,0 +1,36 @@
+{{/* Honest hero asset: stylised terminal showing real kubectl output for KAI.
+     Pink is reserved for the typed commands. The $ prompt and everything else
+     in the output stays neutral so the highlight actually means something. */}}
+<div class="kai-term" role="img" aria-label="Sample kubectl output for KAI Scheduler">
+  <div class="kai-term__bar">
+    <span class="kai-term__dot kai-term__dot--r"></span>
+    <span class="kai-term__dot kai-term__dot--y"></span>
+    <span class="kai-term__dot kai-term__dot--g"></span>
+    <span class="kai-term__title">kai · cluster=prod-01</span>
+    <span class="kai-term__badge"><span class="kai-term__badge-dot"></span>scheduling</span>
+  </div>
+  <pre class="kai-term__body"><code><span class="t-c">$ </span><span class="t-cmd">kubectl get queues</span>
+<span class="t-h">NAME              PRIORITY   PARENT          CHILDREN</span>
+department-a      medium                     team-research-a,team-inference
+department-b      medium                     team-training,team-research-b
+team-inference    high       department-a
+team-research-a   medium     department-a
+team-training     medium     department-b
+team-research-b   low        department-b
+
+<span class="t-c">$ </span><span class="t-cmd">kubectl describe queue team-research-a</span>
+<span class="t-d">Name:         team-research-a</span>
+<span class="t-d">Spec:</span>
+<span class="t-d">  parentQueue: department-a</span>
+<span class="t-d">  resources:</span>
+<span class="t-d">    cpu: { quota: 64, limit: 128, overQuotaWeight: 1 }</span>
+<span class="t-d">    gpu: { quota: 8,  limit: 16,  overQuotaWeight: 1 }</span>
+<span class="t-d">Status:</span>
+<span class="t-d">  allocated:</span>
+<span class="t-d">    cpu: 52</span>
+<span class="t-d">    gpu: 14</span>
+
+<span class="t-c">$ </span><span class="t-cmd">kubectl get schedulingshards</span>
+<span class="t-h">NAME      AGE</span>
+default   12d</code></pre>
+</div>

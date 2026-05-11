@@ -1,0 +1,648 @@
+// ============================================================
+// Shared sections: terminal mockup, CNCF endcap, Talks, Adopters.
+// Surface-neutral — each lives on a white background and is
+// reusable across pages.
+// ============================================================
+
+// ───────── A11Y UTILITIES ─────────
+// Visually-hidden text for screen readers (mirrors Bootstrap 5's .visually-hidden).
+.kai-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Keyboard-focus indicator. Magenta ring with 3px offset, rounded to match
+// button radii. Only fires for keyboard users (`:focus-visible`), not mouse clicks.
+.alt-d,
+.kai-talks, .kai-community {
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #F30099;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+// ───────── KUBECTL TERMINAL MOCKUP ─────────
+.kai-term {
+  width: 100%;
+  max-width: 620px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #00203E;
+  box-shadow:
+    0 30px 60px -25px rgba(0, 32, 62, 0.45),
+    0 14px 28px -12px rgba(243, 0, 153, 0.20);
+  font-family: 'JetBrains Mono', monospace;
+
+  &__bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: #0E2945;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid #0F3358;
+  }
+  &__dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    flex-shrink: 0;
+    &--r { background: #FF5F56; }
+    &--y { background: #FFBD2E; }
+    &--g { background: #27C93F; }
+  }
+  &__title {
+    color: #9DB4D1;
+    font-size: 0.74rem;
+    font-weight: 500;
+    margin-left: 0.6rem;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    background: rgba(243, 0, 153, 0.15);
+    color: #F30099;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.55rem;
+    border-radius: 4px;
+  }
+  &__badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #F30099;
+    animation: kai-term-pulse 2s ease-out infinite;
+  }
+  @keyframes kai-term-pulse {
+    0%, 100% { opacity: 1;   box-shadow: 0 0 0 0 rgba(243, 0, 153, 0.7); }
+    70%      { opacity: 0.5; box-shadow: 0 0 0 8px rgba(243, 0, 153, 0); }
+  }
+
+  &__body {
+    margin: 0;
+    padding: 1.4rem 1.5rem 1.6rem;
+    color: #E6EEF7;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre;
+    code { color: inherit; background: none; font-family: inherit; white-space: pre; }
+    .t-c   { color: #5BD8AC; }              // green prompt $
+    .t-cmd { color: #F30099; font-weight: 600; }
+    .t-h   { color: #5C7A99; font-weight: 500; }
+    .t-g   { color: #5BD8AC; }              // status: Running
+    .t-y   { color: #FFB454; }              // status: Pending / count: pending
+    .t-mag { color: #F30099; font-weight: 600; }
+    .t-d   { color: #9DB4D1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__badge-dot { animation: none; }
+  }
+}
+
+// ============================================================
+// Shared sections: CNCF endcap, Talks, Adopters.
+// ============================================================
+
+$kai-magenta: #F30099;
+$kai-blue:    #00203E;
+$kai-ink:     #0E1E33;
+$kai-muted:   #5A6B7E;
+$kai-soft:    #F5F6F8;
+$kai-line:    rgba(0, 32, 62, 0.08);
+
+// ───────── TALKS ─────────
+.kai-talks {
+  background: $kai-soft;
+  padding: clamp(3.5rem, 6vw, 6rem) 1.25rem;
+  font-family: 'Albert Sans', sans-serif;
+  color: $kai-ink;
+
+  &__inner { max-width: 1180px; margin: 0 auto; }
+
+  &__head {
+    text-align: center;
+    margin: 0 auto 3rem;
+    max-width: 720px;
+    h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: $kai-blue;
+      margin: 0.6rem 0 0;
+    }
+  }
+  &__eyebrow {
+    color: $kai-magenta;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    @media (max-width: 991px) { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    display: flex; flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid $kai-line;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    &:hover {
+      transform: translateY(-3px);
+      border-color: rgba($kai-magenta, 0.5);
+      box-shadow: 0 24px 50px -28px rgba($kai-blue, 0.25);
+      color: inherit;
+      text-decoration: none;
+      .kai-talks__play { background: $kai-magenta; transform: scale(1.06); }
+    }
+  }
+
+  &__thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: $kai-blue;
+    overflow: hidden;
+    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  }
+  &__play {
+    position: absolute;
+    bottom: 12px; right: 12px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 32, 62, 0.85);
+    color: #FFFFFF;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    svg { margin-left: 2px; }
+  }
+
+  &__meta {
+    padding: 1.2rem 1.4rem 1.4rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  &__tag {
+    color: $kai-magenta;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  &__meta h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.2rem 0 0.4rem;
+    line-height: 1.35;
+    color: $kai-blue;
+    letter-spacing: -0.01em;
+  }
+  &__meta p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba($kai-ink, 0.7);
+    margin: 0;
+  }
+}
+
+// ───────── ARCHITECTURE DIAGRAM (shared SVG used in D/E/F/G) ─────────
+.kai-arch-diagram {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  max-width: 1180px;
+}
+
+// ───────── DASHBOARDS (public scale-test + benchmark dashboards) ─────────
+// Engineering-forward: chip with cadence, "live" pulse, technical body copy, outbound CTA.
+.kai-dashboards {
+  background: #FFFFFF;
+  padding: clamp(3.5rem, 6vw, 6rem) 1.25rem;
+  font-family: 'Albert Sans', sans-serif;
+  color: $kai-ink;
+
+  &__inner { max-width: 1180px; margin: 0 auto; }
+
+  &__head {
+    text-align: center;
+    margin: 0 auto 3rem;
+    max-width: 720px;
+    h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: $kai-blue;
+      margin: 0.6rem 0 0.6rem;
+    }
+    p {
+      color: rgba($kai-ink, 0.65);
+      font-size: 1rem;
+      margin: 0;
+    }
+  }
+  &__eyebrow {
+    color: $kai-magenta;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    @media (max-width: 768px) { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    display: flex; flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid $kai-line;
+    border-radius: 14px;
+    padding: 1.6rem 1.7rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    &:hover {
+      transform: translateY(-3px);
+      border-color: rgba($kai-magenta, 0.5);
+      box-shadow: 0 24px 50px -28px rgba($kai-blue, 0.25);
+      color: inherit;
+      text-decoration: none;
+      .kai-dashboards__cta { color: $kai-magenta; }
+    }
+  }
+
+  &__card-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1rem;
+  }
+  &__chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: $kai-muted;
+    background: $kai-soft;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  &__live {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $kai-magenta;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  &__live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: $kai-magenta;
+    animation: kai-dashboards-pulse 2s ease-out infinite;
+  }
+  @keyframes kai-dashboards-pulse {
+    0%, 100% { opacity: 1;   box-shadow: 0 0 0 0 rgba(243, 0, 153, 0.6); }
+    70%      { opacity: 0.5; box-shadow: 0 0 0 7px rgba(243, 0, 153, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &__live-dot { animation: none; }
+  }
+
+  &__card h3 {
+    font-size: 1.18rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: $kai-blue;
+    letter-spacing: -0.01em;
+  }
+  &__card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba($kai-ink, 0.72);
+    margin: 0 0 1.2rem;
+  }
+
+  &__cta {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    color: $kai-blue;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: auto;
+    transition: color 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+    svg { stroke: currentColor; }
+  }
+}
+
+// ───────── DASHBOARDS INLINE (white-surface variant, embedded inside architecture sections) ─────────
+.kai-dashboards-inline {
+  max-width: 1180px;
+  margin: 2.5rem auto 0;
+  padding: 1.4rem 1.6rem;
+  background: $kai-soft;
+  border: 1px solid $kai-line;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  font-family: 'Albert Sans', sans-serif;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  p {
+    flex: 1;
+    margin: 0;
+    color: rgba($kai-ink, 0.78);
+    font-size: 0.96rem;
+    line-height: 1.55;
+    strong { color: $kai-blue; font-weight: 700; }
+  }
+
+  &__live {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $kai-magenta;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba($kai-magenta, 0.10);
+    padding: 0.32rem 0.6rem;
+    border-radius: 5px;
+  }
+  &__live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: $kai-magenta;
+    animation: kai-dashboards-inline-pulse 2s ease-out infinite;
+  }
+  @keyframes kai-dashboards-inline-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &__live-dot { animation: none; }
+  }
+
+  &__links {
+    display: flex; gap: 0.6rem;
+    flex-shrink: 0;
+    a {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: #FFFFFF;
+      border: 1px solid $kai-line;
+      color: $kai-blue;
+      padding: 0.55rem 0.9rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: border-color 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+      &:hover {
+        border-color: rgba($kai-magenta, 0.5);
+        color: $kai-magenta;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// ───────── DASHBOARDS BANNER (Option 2: compact horizontal strip) ─────────
+.kai-dashboards-banner {
+  background: $kai-soft;
+  padding: clamp(1.5rem, 2.5vw, 2rem) 1.25rem;
+  font-family: 'Albert Sans', sans-serif;
+  border-top: 1px solid $kai-line;
+  border-bottom: 1px solid $kai-line;
+
+  &__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+
+  &__copy {
+    display: flex; align-items: center; gap: 0.9rem;
+    flex: 1;
+    p {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.45;
+      color: rgba($kai-ink, 0.78);
+      strong { color: $kai-blue; font-weight: 700; }
+    }
+  }
+
+  &__live {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $kai-magenta;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba($kai-magenta, 0.08);
+    padding: 0.3rem 0.55rem;
+    border-radius: 5px;
+  }
+  &__live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: $kai-magenta;
+    animation: kai-dashboards-banner-pulse 2s ease-out infinite;
+  }
+  @keyframes kai-dashboards-banner-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &__live-dot { animation: none; }
+  }
+
+  &__links {
+    display: flex; gap: 0.7rem;
+    flex-shrink: 0;
+    a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: #FFFFFF;
+      border: 1px solid $kai-line;
+      color: $kai-blue;
+      padding: 0.55rem 0.95rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: border-color 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+                  color 0.15s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+      &:hover {
+        border-color: rgba($kai-magenta, 0.5);
+        color: $kai-magenta;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// ───────── BLOGS (NVIDIA developer-blog roundup) ─────────
+// Mirrors the talks layout but lighter: no play overlay, surface-toned background.
+.kai-blogs {
+  background: #FFFFFF;
+  padding: clamp(3.5rem, 6vw, 6rem) 1.25rem;
+  font-family: 'Albert Sans', sans-serif;
+  color: $kai-ink;
+
+  &__inner { max-width: 1180px; margin: 0 auto; }
+
+  &__head {
+    text-align: center;
+    margin: 0 auto 3rem;
+    max-width: 720px;
+    h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: $kai-blue;
+      margin: 0.6rem 0 0;
+    }
+  }
+  &__eyebrow {
+    color: $kai-magenta;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    @media (max-width: 991px) { grid-template-columns: 1fr; }
+  }
+
+  &__card {
+    display: flex; flex-direction: column;
+    background: #FFFFFF;
+    border: 1px solid $kai-line;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    &:hover {
+      transform: translateY(-3px);
+      border-color: rgba($kai-magenta, 0.5);
+      box-shadow: 0 24px 50px -28px rgba($kai-blue, 0.25);
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  &__thumb {
+    aspect-ratio: 16 / 9;
+    background: $kai-soft;
+    overflow: hidden;
+    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  }
+
+  &__meta {
+    padding: 1.2rem 1.4rem 1.4rem;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  &__tag {
+    color: $kai-magenta;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  &__meta h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.2rem 0 0.4rem;
+    line-height: 1.35;
+    color: $kai-blue;
+    letter-spacing: -0.01em;
+  }
+  &__meta p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba($kai-ink, 0.7);
+    margin: 0;
+  }
+}
+
+// Add .kai-blogs to the focus-ring container set
+.kai-blogs {
+  a:focus-visible {
+    outline: 2px solid $kai-magenta;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+// ───────── COMMUNITY (mirrors baseline's "Join the Community" block) ─────────
+.kai-community {
+  background: #FFFFFF;
+  padding: clamp(3.5rem, 5vw, 5rem) 1.25rem clamp(2.5rem, 4vw, 4rem);
+  font-family: 'Albert Sans', sans-serif;
+  text-align: center;
+
+  &__inner { max-width: 980px; margin: 0 auto; }
+
+  .section-head {
+    color: $kai-blue;
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+  }
+  .section-subhead {
+    color: rgba($kai-ink, 0.55);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: 0 0 2rem;
+  }
+}
+

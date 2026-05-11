@@ -1,0 +1,27 @@
+// KAI Scheduler Brand Colors (official 2026 brand kit)
+// Primary: KAI Magenta - links, buttons, accents, active states
+$primary: #F30099;
+
+// Secondary: Space Blue - navbar, footer, headings, dark surfaces
+$secondary: #00203E;
+
+// Body
+$body-bg: #FFFFFF;
+$body-color: #00203E;
+
+// Code blocks and subtle backgrounds
+$code-bg: #F5F6F8;
+
+// Links
+$link-color: #F30099;
+$link-hover-color: darken(#F30099, 12%);
+
+// Override Docsy "dark" section color (default is teal/turquoise)
+$dark: #00203E;
+
+// Override Docsy "light" section color
+$light: #F5F6F8;
+
+// Font — Albert Sans (official brand typeface)
+$font-family-sans-serif: 'Albert Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-monospace: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;

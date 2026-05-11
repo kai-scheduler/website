@@ -1,0 +1,46 @@
+{{/* Shared talks section. KubeCon and community recordings linked to YouTube, newest first. */}}
+{{ $talks := slice
+  (dict
+    "id" "O-OEqmvCkYg"
+    "tag" "KubeCon EU 2026"
+    "date" "April 2026"
+    "title" "GPU Reservations: Maximising Utilisation and Fairness Across Teams"
+    "summary" "How KAI manages GPU reservations to balance utilisation with fairness across teams.")
+  (dict
+    "id" "nABVTFBmV2M"
+    "tag" "KubeCon EU 2026"
+    "date" "April 2026"
+    "title" "Lessons Learned Orchestrating Multi-Tenant GPUs on OpenShift AI with KAI"
+    "summary" "Real-world deployment patterns from production multi-tenant GPU clusters.")
+  (dict
+    "id" "o5i7pTWZjfo"
+    "tag" "KubeCon NA 2025"
+    "date" "November 2025"
+    "title" "Mind the Topology: Smarter Scheduling for AI Workloads on Kubernetes"
+    "summary" "How Topology-Aware Scheduling optimises placement for disaggregated serving architectures.")
+}}
+<section class="kai-talks">
+  <div class="kai-talks__inner">
+    <header class="kai-talks__head">
+      <span class="kai-talks__eyebrow">From the community</span>
+      <h2>Talks &amp; recordings</h2>
+    </header>
+    <div class="kai-talks__grid">
+      {{ range $talks }}
+        <a class="kai-talks__card" href="https://www.youtube.com/watch?v={{ .id }}" target="_blank" rel="noopener">
+          <div class="kai-talks__thumb">
+            <img loading="lazy" src="https://img.youtube.com/vi/{{ .id }}/hqdefault.jpg" alt="" />
+            <span class="kai-talks__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7L8 5z"/></svg>
+            </span>
+          </div>
+          <div class="kai-talks__meta">
+            <span class="kai-talks__tag">{{ .tag }} · {{ .date }}</span>
+            <h3>{{ .title }}</h3>
+            <p>{{ .summary }}</p>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>

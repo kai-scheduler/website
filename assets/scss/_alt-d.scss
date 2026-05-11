@@ -1,0 +1,177 @@
+// ============================================================
+// Homepage styles, scoped under `.alt-d` (historical class name
+// preserved across HTML + SCSS). All decorative motion respects
+// prefers-reduced-motion.
+// ============================================================
+
+$alt-d-magenta: #F30099;
+$alt-d-blue:    #00203E;
+$alt-d-blue-2:  #0A2A4D;
+$alt-d-ink:     #0E1E33;
+$alt-d-muted:   #5C7A99;
+$alt-d-surface: #F7F9FC;
+
+.alt-d {
+  background: #FFFFFF;
+  color: $alt-d-ink;
+  font-family: 'Albert Sans', sans-serif;
+
+  h1, h2, h3 { color: $alt-d-blue; letter-spacing: -0.02em; }
+
+  // ───────── HERO ─────────
+  .alt-d-hero {
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba($alt-d-magenta, 0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba($alt-d-blue-2, 0.07), transparent 55%),
+      #FFFFFF;
+    padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(3rem, 5vw, 4.5rem);
+    border-bottom: 1px solid rgba($alt-d-blue, 0.06);
+  }
+  .alt-d-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+    max-width: 1280px;
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  .alt-d-headline {
+    font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+    line-height: 1.05;
+    font-weight: 800;
+    margin: 0 0 1.2rem;
+  }
+  .alt-d-lead {
+    font-size: 1.12rem;
+    line-height: 1.65;
+    color: rgba($alt-d-ink, 0.78);
+    max-width: 540px;
+    margin: 0 0 1.8rem;
+  }
+  .alt-d-cta-row {
+    display: flex; flex-wrap: wrap; gap: 0.85rem;
+    margin-bottom: 2.4rem;
+  }
+  .alt-d-btn {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.75rem 1.3rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.96rem;
+    text-decoration: none;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+    &:hover { transform: translateY(-1px); }
+  }
+  .alt-d-btn--primary {
+    background: $alt-d-magenta; color: #FFFFFF;
+    box-shadow: 0 6px 16px -6px rgba($alt-d-magenta, 0.6);
+    &:hover { background: darken($alt-d-magenta, 6%); color: #FFFFFF; }
+  }
+  .alt-d-btn--ghost {
+    background: transparent; color: $alt-d-blue;
+    border: 1.5px solid rgba($alt-d-blue, 0.18);
+    &:hover { background: rgba($alt-d-blue, 0.04); color: $alt-d-blue; border-color: rgba($alt-d-blue, 0.32); }
+  }
+  // Hero right column hosts the shared .kai-term partial; that partial brings its own styling.
+  .alt-d-hero__right { display: flex; justify-content: flex-end; }
+  @media (max-width: 991px) { .alt-d-hero__right { justify-content: center; } }
+  .alt-d-features__more {
+    text-align: center;
+    margin: 2.5rem 0 0;
+    a {
+      color: $alt-d-magenta;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba($alt-d-magenta, 0.4);
+      &:hover { color: darken($alt-d-magenta, 8%); }
+    }
+  }
+
+
+  // ───────── WHY KAI ─────────
+  .alt-d-why {
+    padding: clamp(3rem, 5vw, 5rem) 0;
+    background: $alt-d-blue;
+    color: #FFFFFF;
+  }
+  .alt-d-why__grid {
+    display: grid; gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1180px; margin: 0 auto;
+    @media (max-width: 768px) { grid-template-columns: 1fr; }
+  }
+  .alt-d-why__cell {
+    padding: 1.5rem 1.5rem 1.5rem 0;
+    border-left: 2px solid rgba($alt-d-magenta, 0.7);
+    padding-left: 1.5rem;
+    h3 { color: #FFFFFF; font-size: 1.25rem; font-weight: 700; margin: 0.6rem 0 0.5rem; }
+    p  { color: rgba(#FFFFFF, 0.78); font-size: 0.98rem; line-height: 1.65; margin: 0; }
+  }
+  .alt-d-num {
+    color: $alt-d-magenta;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem; letter-spacing: 0.1em; font-weight: 600;
+  }
+
+  // ───────── ARCHITECTURE ─────────
+  .alt-d-eyebrow {
+    color: $alt-d-magenta;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .alt-d-arch {
+    padding: clamp(4rem, 7vw, 7rem) 1.25rem;
+    background: #FFFFFF;
+  }
+  .alt-d-arch__inner { max-width: 1180px; margin: 0 auto; }
+
+  // ───────── FEATURES ─────────
+  .alt-d-features {
+    padding: clamp(3.5rem, 6vw, 6rem) 0;
+    background: $alt-d-surface;
+  }
+  .alt-d-section-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem;
+    h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; margin: 0 0 0.7rem; }
+    p  { color: rgba($alt-d-ink, 0.65); font-size: 1.08rem; margin: 0; }
+  }
+  .alt-d-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    @media (max-width: 991px) { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) { grid-template-columns: 1fr; }
+  }
+  .alt-d-feature-card {
+    background: #FFFFFF;
+    border: 1px solid rgba($alt-d-blue, 0.08);
+    border-radius: 12px;
+    padding: 1.6rem 1.5rem 1.4rem;
+    transition: border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    &:hover {
+      border-color: rgba($alt-d-magenta, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px -18px rgba($alt-d-blue, 0.3);
+    }
+    h3 { font-size: 1.06rem; font-weight: 700; margin: 0 0 0.45rem; color: $alt-d-blue; }
+    p  { font-size: 0.95rem; line-height: 1.6; color: rgba($alt-d-ink, 0.7); margin: 0; }
+  }
+  .alt-d-feature-card__icon {
+    width: 38px; height: 38px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba($alt-d-magenta, 0.10);
+    color: $alt-d-magenta;
+    border-radius: 9px;
+    margin-bottom: 1rem;
+    svg { width: 22px; height: 22px; }
+  }
+
+}

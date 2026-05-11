@@ -1,0 +1,100 @@
+{{/* Shared architecture diagram. Default-shard simplification: one scheduler manages
+     three accelerator-typed node groups inside a single GPU cluster. */}}
+<svg class="kai-arch-diagram" viewBox="0 0 1100 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KAI Scheduler architecture: workloads, scheduler, and a GPU cluster split into A100, H100, and GB200 node groups">
+  {{/* Arrowheads are drawn as inline <polygon> elements at each path endpoint instead of SVG
+       markers. Markers + markerUnits + viewBox combine in ways that produce subtle off-by-one
+       rendering at certain stroke widths. With explicit polygons, the triangle base is exactly
+       where the line ends, and the tip is exactly at the visual end of the arrow. */}}
+
+  {{/* ─── Workloads (left column) ─── */}}
+  <g transform="translate(40,40)">
+    <text x="100" y="0" text-anchor="middle" fill="#5A6B7E" font-family="Albert Sans" font-size="11" font-weight="700" letter-spacing="2">WORKLOADS</text>
+
+    {{/* Hero workload: same dimensions as the others, magenta border marks it as the priority workload. */}}
+    <g transform="translate(0,50)">
+      <rect width="200" height="44" rx="8" fill="#FFFFFF" stroke="#F30099" stroke-width="1.5"/>
+      <text x="20" y="20" fill="#0E1E33" font-family="Albert Sans" font-size="13" font-weight="700">hero-training-job</text>
+      <text x="20" y="34" fill="#5A6B7E" font-family="JetBrains Mono" font-size="9">kind: <tspan fill="#F30099" font-weight="700">PyTorchJob</tspan></text>
+    </g>
+
+    {{/* Other workloads — same 60px stride as the hero, kind text carries the type colour, no side stripe. */}}
+    {{ range $i, $w := slice
+        (dict "label" "inference-svc"    "color" "#7AC8FF" "kind" "Deployment")
+        (dict "label" "notebook"         "color" "#5BD8AC" "kind" "Pod")
+        (dict "label" "batch-eval"       "color" "#FFB454" "kind" "Job")
+        (dict "label" "serving-cluster"  "color" "#9D7CF5" "kind" "RayCluster") }}
+      <g transform="translate(0,{{ add 110 (mul $i 60) }})">
+        <rect width="200" height="44" rx="8" fill="#FFFFFF" stroke="#E5E9EE" stroke-width="1"/>
+        <text x="20" y="20" fill="#0E1E33" font-family="Albert Sans" font-size="13" font-weight="600">{{ $w.label }}</text>
+        <text x="20" y="34" fill="#5A6B7E" font-family="JetBrains Mono" font-size="9">kind: <tspan fill="{{ $w.color }}" font-weight="700">{{ $w.kind }}</tspan></text>
+      </g>
+    {{ end }}
+  </g>
+
+  {{/* ─── KAI Scheduler box (centre) — no decorative badges, just title + subtitle ─── */}}
+  <g transform="translate(440,200)">
+    <rect width="220" height="90" rx="14" fill="#00203E" stroke="#001428" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" fill="#FFFFFF" font-family="Albert Sans" font-size="15" font-weight="800">KAI Scheduler</text>
+    <text x="110" y="62" text-anchor="middle" fill="#9DB4D1" font-family="Albert Sans" font-size="11">Queues · Actions · Plugins</text>
+  </g>
+
+  {{/* ─── Arrows: workloads → scheduler. Each arrow = a cubic line (ends at x=428, the triangle base) + an inline triangle (tip at x=438, base at x=428). 2px gap from the box edge (x=440). ─── */}}
+  {{/* Lines */}}
+  <g stroke="#F30099" stroke-width="1.8" fill="none">
+    <path d="M240,112 C320,112 380,215 428,215"/>
+    <path d="M240,172 C320,172 380,230 428,230"/>
+    <path d="M240,232 C320,232 380,245 428,245"/>
+    <path d="M240,292 C320,292 380,260 428,260"/>
+    <path d="M240,352 C320,352 380,275 428,275"/>
+  </g>
+  {{/* Triangles — magenta-filled polygons at each line end. Tip at x=438, base 10px back at x=428. */}}
+  <g fill="#F30099">
+    <polygon points="438,215 428,210 428,220"/>
+    <polygon points="438,230 428,225 428,235"/>
+    <polygon points="438,245 428,240 428,250"/>
+    <polygon points="438,260 428,255 428,265"/>
+    <polygon points="438,275 428,270 428,280"/>
+  </g>
+
+  {{/* ─── GPU CLUSTER container (right) — wraps three accelerator-typed node groups ─── */}}
+  <g transform="translate(720,20)">
+    {{/* Outer cluster card — extra bottom padding so the dashed stroke doesn't touch the GB200 border */}}
+    <rect width="350" height="460" rx="16" fill="#FAFBFD" stroke="#D8DEE6" stroke-width="1.5" stroke-dasharray="6 4"/>
+    {{/* Header */}}
+    <text x="20" y="32" fill="#5A6B7E" font-family="Albert Sans" font-size="11" font-weight="700" letter-spacing="2">GPU CLUSTER</text>
+    <text x="330" y="32" text-anchor="end" fill="#5A6B7E" font-family="JetBrains Mono" font-size="10">22 nodes · 3 node groups</text>
+    <line x1="20" y1="48" x2="330" y2="48" stroke="#E5E9EE" stroke-width="1"/>
+
+    {{/* Three node-group cards. 'A100 nodes' / 'H100 nodes' / 'GB200 nodes'. */}}
+    {{ range $i, $pool := slice
+      (dict "label" "A100 nodes"  "short" "A100"  "color" "#7AC8FF" "count" 8 "active" 6)
+      (dict "label" "H100 nodes"  "short" "H100"  "color" "#F30099" "count" 8 "active" 7)
+      (dict "label" "GB200 nodes" "short" "GB200" "color" "#5BD8AC" "count" 6 "active" 4) }}
+      {{ $y := add 60 (mul $i 130) }}
+      <g transform="translate(20,{{ $y }})">
+        <rect width="310" height="120" rx="10" fill="#FFFFFF" stroke="#E5E9EE"/>
+        <text x="14" y="22" fill="#0E1E33" font-family="Albert Sans" font-size="13" font-weight="700">{{ $pool.label }}</text>
+        <text x="14" y="36" fill="#5A6B7E" font-family="JetBrains Mono" font-size="9">{{ $pool.count }} nodes</text>
+        <text x="296" y="22" text-anchor="end" fill="#F30099" font-family="JetBrains Mono" font-size="9" font-weight="700">{{ $pool.active }}/{{ $pool.count }} allocated</text>
+        {{ range $j := seq 0 (sub $pool.count 1) }}
+          {{ $col := mod $j 8 }}
+          {{ $opacity := cond (lt $j $pool.active) "0.92" "0.18" }}
+          <rect x="{{ add 14 (mul $col 36) }}" y="56" width="30" height="46" rx="4" fill="{{ $pool.color }}" opacity="{{ $opacity }}"/>
+          <text x="{{ add 29 (mul $col 36) }}" y="82" text-anchor="middle" fill="#FFFFFF" font-family="JetBrains Mono" font-size="8" font-weight="700">{{ $pool.short }}</text>
+        {{ end }}
+      </g>
+    {{ end }}
+  </g>
+
+  {{/* ─── Arrows: scheduler → cluster. Lines end at x=705, triangles tip at x=715 (5px gap from the dashed cluster border at x=720). ─── */}}
+  <g stroke="#F30099" stroke-width="1.8" fill="none">
+    <path d="M660,222 C685,222 685,140 705,140"/>
+    <path d="M660,245 C685,245 685,270 705,270"/>
+    <path d="M660,268 C685,268 685,400 705,400"/>
+  </g>
+  <g fill="#F30099">
+    <polygon points="715,140 705,135 705,145"/>
+    <polygon points="715,270 705,265 705,275"/>
+    <polygon points="715,400 705,395 705,405"/>
+  </g>
+</svg>

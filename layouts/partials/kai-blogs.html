@@ -1,0 +1,62 @@
+{{/* Shared blog roundup. Newest first. Tag shows the date only — company name lives in
+     the URL hostname, no need to repeat it in the eyebrow. */}}
+{{ $posts := slice
+  (dict
+    "url"   "https://developer.nvidia.com/blog/ensuring-balanced-gpu-allocation-in-kubernetes-clusters-with-time-based-fairshare/"
+    "image" "https://developer-blogs.nvidia.com/wp-content/uploads/2026/01/run-ai-1024x576.jpg"
+    "date"  "January 2026"
+    "title" "Ensuring Balanced GPU Allocation with Time-Based Fairshare"
+    "summary" "How KAI tracks historical GPU usage to allocate shared resources fairly across teams over time, not just at the current moment.")
+  (dict
+    "url"   "https://www.vcluster.com/blog/gpu-scheduling-with-nvidia-kai-and-vcluster"
+    "image" "https://cdn.prod.website-files.com/68ad5281556da93bd7179b0e/6931168995fb9ce58d4ae3cb_68f736835280df7bf5cb7a77_GPU%252520on%252520Kubernetes_%252520Safe%252520Upgrades%252520Flexible%252520Multitenancy%252520no%252520text.jpeg"
+    "date"  "October 2025"
+    "title" "GPU Scheduling with KAI and vCluster"
+    "summary" "Running KAI inside virtual clusters provisioned by vCluster: isolated tenants, safe upgrades, and a sandbox for testing scheduler changes without touching the host cluster.")
+  (dict
+    "url"   "https://developer.nvidia.com/blog/enable-gang-scheduling-and-workload-prioritization-in-ray-with-nvidia-kai-scheduler/"
+    "image" "https://developer-blogs.nvidia.com/wp-content/uploads/2025/10/KAI-Scheduler-1024x576-jpg.webp"
+    "date"  "October 2025"
+    "title" "Enable Gang Scheduling and Workload Prioritisation in Ray with KAI"
+    "summary" "Configuring KubeRay to schedule with KAI: gang scheduling for RayCluster, hierarchical queues with priority classes, and preemption between Ray workloads.")
+  (dict
+    "url"   "https://www.elotl.co/blog/building-an-elastic-gpu-cluster-with-the-kai-scheduler-and-luna-autoscaler"
+    "image" "https://www.elotl.co/uploads/1/3/0/3/130365369/published/building-an-elastic-gpu-cluster-with-the-kai-scheduler-and-luna-autoscaler.png?1748457454"
+    "date"  "May 2025"
+    "title" "Building an Elastic GPU Cluster with KAI and Luna Autoscaler"
+    "summary" "How Luna pairs with KAI to scale GPU capacity to actual queue demand, not to every pending pod the API server happens to see.")
+  (dict
+    "url"   "https://www.zenml.io/blog/nvidia-kai-scheduler-optimize-gpu-usage-in-zenml-pipelines"
+    "image" "https://assets.zenml.io/webflow/64a817a2e7e2208272d1ce30/b688a425/6825b98507e5d13e2e3f821d_Clipboard_Image_from_TinyPNG__1_.png"
+    "date"  "May 2025"
+    "title" "Optimising GPU Usage in ZenML Pipelines with KAI"
+    "summary" "Wiring fractional GPU sharing into ZenML pipelines so multiple ML steps share a physical GPU on Kubernetes for tighter utilisation and lower cost.")
+  (dict
+    "url"   "https://developer.nvidia.com/blog/nvidia-open-sources-runai-scheduler-to-foster-community-collaboration/"
+    "image" "https://developer-blogs.nvidia.com/wp-content/uploads/2025/03/dgx-corp-blog-scale-ai-infrastructure-run-ai-3813400-1480x830-1-1024x574.jpg"
+    "date"  "April 2025"
+    "title" "NVIDIA Open-Sources Run:ai Scheduler to Foster Community Collaboration"
+    "summary" "Run:ai scheduler is open-sourced under Apache 2.0. Walk through what it brings to Kubernetes clusters and the architecture that makes it work.")
+}}
+<section class="kai-blogs">
+  <div class="kai-blogs__inner">
+    <header class="kai-blogs__head">
+      <span class="kai-blogs__eyebrow">Read more</span>
+      <h2>From the blog</h2>
+    </header>
+    <div class="kai-blogs__grid">
+      {{ range $posts }}
+        <a class="kai-blogs__card" href="{{ .url }}" target="_blank" rel="noopener">
+          <div class="kai-blogs__thumb">
+            <img loading="lazy" src="{{ .image | safeURL }}" alt="" />
+          </div>
+          <div class="kai-blogs__meta">
+            <span class="kai-blogs__tag">{{ .date }}</span>
+            <h3>{{ .title }}</h3>
+            <p>{{ .summary }}</p>
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
