@@ -1,6 +1,6 @@
 # KAI Scheduler Website
 
-Source for the [KAI Scheduler](https://github.com/kai-scheduler/KAI-Scheduler) website at **https://kai-scheduler.github.io/website/**.
+Source for the [KAI Scheduler](https://github.com/kai-scheduler/KAI-Scheduler) website at **https://kai-scheduler.dev/**.
 
 The site is built with [Hugo](https://gohugo.io/) (extended) and the [Docsy](https://www.docsy.dev/) theme, pulled in as a Hugo module.
 
