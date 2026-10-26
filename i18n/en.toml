@@ -1,0 +1,4 @@
+# Docsy's default footer adds "All Rights Reserved", which conflicts with the
+# CC BY 4.0 license of the documentation.
+[footer_all_rights_reserved]
+other = ""

@@ -43,7 +43,10 @@ menu:
 params:
   description: "Kubernetes scheduler optimised for GPU resource allocation for AI workloads"
   images: [images/logos/horizontal-color-positive-transparent.svg]
-  copyright: "The KAI Scheduler Authors"
+  copyright:
+    authors: >-
+      The KAI Scheduler Authors |
+      Documentation distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
   ui:
     navbar_logo: true
