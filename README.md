@@ -85,6 +85,8 @@ The static site is written to `public/`. That directory is what gets deployed.
 ├── assets/
 │   ├── scss/                  # Brand variables + component styles
 │   └── icons/                 # Inline SVG icons
+├── i18n/
+│   └── en.toml                # Docsy string overrides (footer text)
 └── static/                    # Pass-through assets
     ├── favicons/
     ├── images/logos/          # Logo SVGs the site itself renders
@@ -159,4 +161,6 @@ For larger changes (new sections, restructured navigation, design shifts), it's 
 
 ## License
 
-The website content and code in this repository are released under the [Apache License 2.0](LICENSE).
+The code in this repository is licensed under the [Apache License 2.0](LICENSE).
+
+The KAI Scheduler documentation is licensed under the [Creative Commons Attribution 4.0 International License (CC-BY-4.0)](LICENSE-docs).
